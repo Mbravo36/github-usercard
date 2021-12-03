@@ -1,4 +1,4 @@
-`import axios from 'axios';`
+import axios from 'axios';
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
@@ -52,30 +52,42 @@ const followersArray = [];
 */
 function gitCard (obj){
   //instantiating elements
-  const cardClass = document.createElement('div');
+  const card = document.createElement('div');
   const userImg = document.createElement('img');
   const cardInfo = document.createElement('div');
   const userName = document.createElement('h3');
-  const usersNametwo = document.createElement('p');
+  const usersNameTwo = document.createElement('p');
   const usersLocation = document.createElement('p');
-  const usersGitAddress = document.createElement('p');
+  const userProfile = document.createElement('p');
+  const usersGitAddress = document.createElement('a');
   const usersFollowers = document.createElement('p');
   const usersFollowing = document.createElement('p');
   const usersBio = document.createElement('p');
   //setting class names, attributes, and text
-  cardClass.classList.add('card');
+  card.classList.add('card');
   userImg.src = obj.avatar_url;
   cardInfo.classList.add('card-info');
   userName.textContent = `${obj.name}`;
-  usersNametwo.textContent = `${obj.login}`;
+  usersNameTwo.textContent = `${obj.login}`;
   usersLocation.textContent = obj.location;
+  userProfile.textContent = 'Profile';
   usersGitAddress.textContent = `${obj.url}`;
   usersFollowers.textContent = `Followers: ${obj.followers}`;
   usersFollowing.textContent = `Following: ${obj.following}`;
   usersBio.textContent = `${obj.bio}`;
   //hierarchy
-  
+  card.appendChild(userImg);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(userName);
+  cardInfo.appendChild(usersNameTwo);
+  cardInfo.appendChild(usersLocation);
+  cardInfo.appendChild(userProfile);
+  userProfile.appendChild(usersGitAddress);
+  cardInfo.appendChild(usersFollowers);
+  cardInfo.appendChild(usersFollowing);
+  cardInfo.appendChild(usersBio);
 
+  return card;
 }
 
 /*
