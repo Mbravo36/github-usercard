@@ -4,7 +4,21 @@ import axios from 'axios';
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-   axios.get('https://api.github.com/users/Mbravo36')
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'];
+
+for (let i = 0; i < followersArray.length; i++) {
+  getGitCard(followersArray[i]);
+}
+
+function getGitCard(username){
+  axios.get(`https://api.github.com/users/${username}`)
+  .then(resp => {
+    document.querySelector('.cards').appendChild(gitCard(resp.data));
+  })
+  .catch(err => console.error(err))
+}
+
+  
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -29,7 +43,9 @@ import axios from 'axios';
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+
+
+
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -63,18 +79,26 @@ function gitCard (obj){
   const usersFollowers = document.createElement('p');
   const usersFollowing = document.createElement('p');
   const usersBio = document.createElement('p');
-  //setting class names, attributes, and text
+
+  //Style
   card.classList.add('card');
-  userImg.src = obj.avatar_url;
   cardInfo.classList.add('card-info');
-  userName.textContent = `${obj.name}`;
-  usersNameTwo.textContent = `${obj.login}`;
+  userName.classList.add('name');
+  usersNameTwo.classList.add('userName');
+
+  //setting class names, attributes, and text
+  userImg.src = obj.avatar_url;
+  userName.textContent = obj.name;
   usersLocation.textContent = obj.location;
-  userProfile.textContent = 'Profile';
+  usersNameTwo.textContent = obj.login;
+  userProfile.textContent = 'Profile: ';
   usersGitAddress.textContent = `${obj.url}`;
+  usersGitAddress.href = obj.html_url;
   usersFollowers.textContent = `Followers: ${obj.followers}`;
   usersFollowing.textContent = `Following: ${obj.following}`;
   usersBio.textContent = `${obj.bio}`;
+
+
   //hierarchy
   card.appendChild(userImg);
   card.appendChild(cardInfo);
