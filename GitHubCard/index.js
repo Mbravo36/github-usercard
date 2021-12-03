@@ -1,9 +1,10 @@
+`import axios from 'axios';`
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-
+   axios.get('https://api.github.com/users/Mbravo36')
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -49,6 +50,33 @@ const followersArray = [];
       </div>
     </div>
 */
+function gitCard (obj){
+  //instantiating elements
+  const cardClass = document.createElement('div');
+  const userImg = document.createElement('img');
+  const cardInfo = document.createElement('div');
+  const userName = document.createElement('h3');
+  const usersNametwo = document.createElement('p');
+  const usersLocation = document.createElement('p');
+  const usersGitAddress = document.createElement('p');
+  const usersFollowers = document.createElement('p');
+  const usersFollowing = document.createElement('p');
+  const usersBio = document.createElement('p');
+  //setting class names, attributes, and text
+  cardClass.classList.add('card');
+  userImg.src = obj.avatar_url;
+  cardInfo.classList.add('card-info');
+  userName.textContent = `${obj.name}`;
+  usersNametwo.textContent = `${obj.login}`;
+  usersLocation.textContent = obj.location;
+  usersGitAddress.textContent = `${obj.url}`;
+  usersFollowers.textContent = `Followers: ${obj.followers}`;
+  usersFollowing.textContent = `Following: ${obj.following}`;
+  usersBio.textContent = `${obj.bio}`;
+  //hierarchy
+  
+
+}
 
 /*
   List of LS Instructors Github username's:
